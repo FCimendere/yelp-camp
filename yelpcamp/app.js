@@ -3,6 +3,8 @@ const path = require('path');
 const mongoose = require('mongoose');
 const Campground = require('./models/campground');
 const { reset } = require('nodemon');
+const { request } = require('http');
+const methodOverride = require('method-override');
 
 const mongoUrl = 'mongodb://127.0.0.1:27017/yelp-camp';
 
@@ -23,6 +25,7 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.urlencoded({extended:true}));
+app.use(methodOverride('_method'));
 
 app.get('/', (req,res)=> {
     res.render('home')
