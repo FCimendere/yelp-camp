@@ -15,6 +15,7 @@ db.once('open', () => {
 
 const sample =  array => array[Math.floor(Math.random() * array.length)];
 
+//create 50 random places name
 const seedDB = async () => {
     await Campground.deleteMany({});
     for(let i = 0 ; i < 50 ; i++){
@@ -28,4 +29,7 @@ const seedDB = async () => {
     
 }
 
-seedDB();
+//Close DB connection 
+seedDB().then => {
+    mongoose.connection.close();
+}
