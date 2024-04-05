@@ -31,6 +31,17 @@ app.get('/campgrounds', async (req,res)=> {
     res.render('campgrounds/index', {campgrounds});
 })
 
+// Campground details show route
+app.get('/campgrounds/:id', async(req,res) => {
+    const campground = await Campground.findById(req.params.id);
+    res.render('campgrounds/show', {campground});
+})
+
+//CRUD - CREATE | route for create new campgrounds
+app.get('/camprogrounds/new', (req,res) => {
+    res.render('campgrounds/new');
+})
+
 //Server Listen
 app.listen(3000, () => {
     console.log('Serving on port 3000')
