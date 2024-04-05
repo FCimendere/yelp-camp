@@ -30,6 +30,6 @@ const seedDB = async () => {
 }
 
 //Close DB connection 
-seedDB().then => {
+seedDB().then(() => {
     mongoose.connection.close();
-}
+})
