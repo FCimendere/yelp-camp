@@ -34,17 +34,18 @@ app.get('/campgrounds', async (req,res)=> {
     res.render('campgrounds/index', {campgrounds});
 })
 
-//CRUD - CREATE | route for showing new form on page
+//CRUD - CREATE | route for showing form (new add form)
 app.get('/campgrounds/new', (req,res) => {
     res.render('campgrounds/new');
 })
 
-//CRUD - CREATE | route for collecting info from body of the post and save to the DB
+//CRUD - CREATE | route for submitting form (new add form)
 app.post('/campgrounds', async (req, res) => {
     const campground = new Campground(req.body.campground);
     await campground.save();
     res.redirect(`/campgrounds/${campground._id}`)
 })
+
 
 // Campground details show route
 app.get('/campgrounds/:id', async(req,res) => {
@@ -52,8 +53,20 @@ app.get('/campgrounds/:id', async(req,res) => {
     res.render('campgrounds/show', {campground});
 })
 
+//CRUD - UPDATE/EDIT | route for showing form (edit form)
+app.get('/campgrounds/:id/edit', async (req,res) => {
+    const campground = await Campground.findById(req.params.id);
+    res.render('campgrounds/edit', { campground})
+})
+
+//CRUD - UPDATE/EDIT | route for submitting form (edit form)
+// app.put('/campgrounds/:id/edit', async (req,res) => {
+//     const m = req.body.campground;
+//     const campground = await Campground.findById(m);
+//     res.redirect('/campgrounds', {m})
 
 
+// })
 
 //Server Listen
 app.listen(3000, () => {
