@@ -63,13 +63,18 @@ app.get('/campgrounds/:id/edit', async (req,res) => {
 })
 
 //CRUD - UPDATE/EDIT | route for submitting form (edit form)
-// app.put('/campgrounds/:id/edit', async (req,res) => {
-//     const m = req.body.campground;
-//     const campground = await Campground.findById(m);
-//     res.redirect('/campgrounds', {m})
+app.put('/campgrounds/:id', async (req,res) => {
+    const {id} = req.params;
+    const campground = await Campground.findByIdAndUpdate(id, {...req.body.campground});
+    res.redirect(`/campgrounds/${campground._id}`)
+})
 
-
-// })
+//CRUD - DELETE | delete a campground from the DB
+app.delete('/campgrounds/:id', async (req,res)=> {
+    const {id} = req.params;
+    await Campground.findByIdAndDelete(id);
+    res.redirect('/campgrounds');
+})
 
 //Server Listen
 app.listen(3000, () => {
