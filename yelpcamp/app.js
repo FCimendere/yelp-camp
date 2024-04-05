@@ -38,7 +38,7 @@ app.get('/campgrounds/:id', async(req,res) => {
 })
 
 //CRUD - CREATE | route for create new campgrounds
-app.get('/camprogrounds/new', (req,res) => {
+app.get('/campgrounds/new', (req,res) => {
     res.render('campgrounds/new');
 })
 
