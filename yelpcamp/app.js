@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
+const ejsMate = require('ejs-mate');
 const Campground = require('./models/campground');
 const { reset } = require('nodemon');
 const { request } = require('http');
@@ -21,6 +22,7 @@ db.once('open', () => {
 const app = express();
 
 // Setting for ejs engine
+app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
