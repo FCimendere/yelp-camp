@@ -2,11 +2,13 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const ejsMate = require('ejs-mate');
+const ExpressError = require('./utils/ExpressError');
 const catchAsync = require('./utils/catchAsync');
 const Campground = require('./models/campground');
 const { reset } = require('nodemon');
 const { request } = require('http');
 const methodOverride = require('method-override');
+
 
 const mongoUrl = 'mongodb://127.0.0.1:27017/yelp-camp';
 
@@ -47,6 +49,7 @@ app.get('/campgrounds/new', (req,res) => {
 
 //CRUD - CREATE | route for submitting form (new add form)
 app.post('/campgrounds', catchAsync(async (req, res,next) => {
+    if(!req.body.campground) throw new ExpressError('Invalid Campground Data',400)
     const campground = new Campground(req.body.campground);
     await campground.save();
     res.redirect(`/campgrounds/${campground._id}`)
@@ -79,8 +82,13 @@ app.delete('/campgrounds/:id', catchAsync(async (req,res)=> {
     res.redirect('/campgrounds');
 }))
 
+app.all('*', (req,res,next) => {
+    next(new ExpressError('Page Not Found', 404));
+})
+
 app.use((err,req,res,next) => {
-    res.send('something went wrong')
+    const {statusCode = 500, message = 'Something went wrong baby!'} = err;
+    res.status(statusCode).send(message);
 })
 
 //Server Listen
