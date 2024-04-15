@@ -8,6 +8,8 @@ const Campground = require('./models/campground');
 const { reset } = require('nodemon');
 const { request } = require('http');
 const methodOverride = require('method-override');
+const { errorMonitor } = require('events');
+
 
 
 const mongoUrl = 'mongodb://127.0.0.1:27017/yelp-camp';
@@ -23,6 +25,7 @@ db.once('open', () => {
 });
 
 const app = express();
+
 
 // Setting for ejs engine
 app.engine('ejs', ejsMate);
@@ -87,8 +90,9 @@ app.all('*', (req,res,next) => {
 })
 
 app.use((err,req,res,next) => {
-    const {statusCode = 500, message = 'Something went wrong baby!'} = err;
-    res.status(statusCode).send(message);
+    const {statusCode = 500} = err;
+    if(!err.message) err.message = 'Something went wrong baby!'
+    res.status(statusCode).render('error', {err});
 })
 
 //Server Listen
