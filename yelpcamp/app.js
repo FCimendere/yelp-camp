@@ -37,6 +37,7 @@ app.use(methodOverride('_method'));
 //routes 
 app.use('/campgrounds', campgrounds)
 app.use('/campgrounds/:id/reviews', reviews)
+app.use(express.static(path.join(__dirname,'public')))
 
 app.get('/', (req,res)=> {
     res.render('home')
