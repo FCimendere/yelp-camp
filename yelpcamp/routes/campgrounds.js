@@ -35,6 +35,7 @@ router.get('/new', isLoggedIn, (req,res) => {
 router.post('/', isLoggedIn, validateCampground, catchAsync(async (req, res,next) => {
     // if(!req.body.campground) throw new ExpressError('Invalid Campground Data',400)
     const campground = new Campground(req.body.campground);
+    campground.author = req.user._id;
     await campground.save();
     req.flash('success', 'Successfully made a new campground!');
     res.redirect(`/campgrounds/${campground._id}`)
@@ -43,7 +44,7 @@ router.post('/', isLoggedIn, validateCampground, catchAsync(async (req, res,next
 
 // Campground details show route
 router.get('/:id', catchAsync(async(req,res) => {
-    const campground = await Campground.findById(req.params.id).populate('reviews');
+    const campground = await Campground.findById(req.params.id).populate('reviews').populate('author');
     // first way to show flash onto screen
     //res.render('campgrounds/show', {campground, msg: req.flash('success')});
     //better way to show flash onto screen - with middelware
