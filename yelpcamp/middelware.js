@@ -21,6 +21,7 @@ module.exports.isLoggedIn = (req, res, next) => {
     next();
 }
 
+//control the if Author and user are same person 
 module.exports.isAuthor = async(req,res,next) => {
     const {id} = req.params;
     const campground = await Campground.findById(id);
@@ -29,5 +30,27 @@ module.exports.isAuthor = async(req,res,next) => {
         return res.redirect(`/campgrounds/${id}`);
     }
     next();
+}
+
+//JOI server side data validator middelware for Campground
+module.exports.validateCampground = (req, res, next) => {
+    const {error} = campgroundSchema.validate(req.body);
+    if(error){
+        const msg = error.details.map(el => el.message).join(',');
+        throw new ExpressError(msg, 400)
+    } else{
+        next();
+    }
+}
+
+//JOI server side data validator middelware for reviews
+module.exports.validateReview = (req, res, next) => {
+    const {error} = reviewSchema.validate(req.body);
+    if(error){
+        const msg = error.details.map(el => el.message).join(',');
+        throw new ExpressError(msg, 400)
+    } else{
+        next();
+    }
 }
 
