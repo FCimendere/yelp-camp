@@ -31,7 +31,14 @@ router.post('/', isLoggedIn, validateCampground, catchAsync(async (req, res,next
 
 // Campground details show route
 router.get('/:id', catchAsync(async(req,res) => {
-    const campground = await Campground.findById(req.params.id).populate('reviews').populate('author');
+    const campground = await Campground.findById(req.params.id).populate({
+        path:'reviews',
+        // populate of the review's author - not campground user-
+        populate: {
+            path:'author'
+        }
+    // populate of the campground's author-
+    }).populate('author');
     // first way to show flash onto screen
     //res.render('campgrounds/show', {campground, msg: req.flash('success')});
     //better way to show flash onto screen - with middelware

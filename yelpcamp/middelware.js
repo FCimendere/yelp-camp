@@ -32,6 +32,17 @@ module.exports.isAuthor = async(req,res,next) => {
     next();
 }
 
+//control the if Author of the review and user are same person 
+module.exports.isReviewAuthor = async(req,res,next) => {
+    const {id, reviewId} = req.params;
+    const review = await Review.findById(reviewId);
+    if(!review.author.equals(req.user._id)){
+        req.flash('error', 'You do not have permission!');
+        return res.redirect(`/campgrounds/${id}`);
+    }
+    next();
+}
+
 //JOI server side data validator middelware for Campground
 module.exports.validateCampground = (req, res, next) => {
     const {error} = campgroundSchema.validate(req.body);
@@ -53,4 +64,6 @@ module.exports.validateReview = (req, res, next) => {
         next();
     }
 }
+
+
 
