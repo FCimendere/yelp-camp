@@ -7,25 +7,24 @@ const campgrounds = require('../controllers/campgrounds');
 
 //******CAMPGROUND ROUTES******/
 
+router.route('/')
 //CRUD - READ | route for all names of the campgrounds
-router.get('/', catchAsync(campgrounds.index));
+//CRUD - CREATE | route for submitting form (new add form)
+    .get(catchAsync(campgrounds.index))
+    .post(isLoggedIn, validateCampground, catchAsync(campgrounds.createCampground))
 
 //CRUD - CREATE | route for showing form (new add form)
 router.get('/new', isLoggedIn, campgrounds.renderNewForm);
 
-//CRUD - CREATE | route for submitting form (new add form)
-router.post('/', isLoggedIn, validateCampground, catchAsync(campgrounds.createCampground));
-
+router.route('/:id')
 // Campground details show route
-router.get('/:id', catchAsync(campgrounds.showCampground));
+// CRUD - UPDATE/EDIT | route for submitting form (edit form)
+// CRUD - DELETE | delete a campground from the DB
+    .get(catchAsync(campgrounds.showCampground))
+    .put(isLoggedIn, isAuthor, validateCampground, catchAsync(campgrounds.updateCampground))
+    .delete(isLoggedIn, isAuthor, catchAsync(campgrounds.deleteCampground))
 
 //CRUD - UPDATE/EDIT | route for showing form (edit form)
 router.get('/:id/edit', isLoggedIn, isAuthor, catchAsync(campgrounds.renderEditForm));
-
-//CRUD - UPDATE/EDIT | route for submitting form (edit form)
-router.put('/:id', isLoggedIn, isAuthor, validateCampground, catchAsync(campgrounds.updateCampground));
-
-//CRUD - DELETE | delete a campground from the DB
-router.delete('/:id', isLoggedIn, isAuthor, catchAsync(campgrounds.deleteCampground));
 
 module.exports = router;
