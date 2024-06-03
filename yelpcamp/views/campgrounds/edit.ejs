@@ -84,9 +84,10 @@
           </label>
         </div>
       </div>
+
       <div class="mb-3">
         <% campground.images.forEach(function(img,i) { %>
-        <img src="<%= img.url  %>" class="img-thumbnail" alt="" />
+        <img src="<%= img.thumbnail  %>" class="img-thumbnail" alt="" />
         <div class="form-check-inline">
           <input
             type="checkbox"
@@ -98,6 +99,28 @@
         <label for="image-<%=i%>">Delete?</label>
         <% }) %>
       </div>
+
+      <!-- row grid view trial -->
+      <!-- <div class="row">
+        <div class="col-md-3">
+          <div class="custom-control custom-checkbox image-checkbox">
+            <% campground.images.forEach(function(img,i) { %>
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="image-<%=i%>"
+              name="deleteImages[]"
+              value="<%= img.filename %>"
+            />
+            <label class="custom-control-label" for="image-<%=i%>">
+              <img src="<%= img.thumbnail  %>" class="img-fluid" alt="#" />
+            </label>
+            <% }) %>
+          </div>
+        </div>
+      </div> -->
+
+      <!-- ***** -->
       <div class="mb-3">
         <button class="btn btn-info">Update Campground</button>
       </div>
