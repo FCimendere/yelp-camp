@@ -6,7 +6,7 @@
     <!-- *************** -->
     <!-- Bootstrap carousel part -->
     <!-- *************** -->
-    <div id="map" style="width: 400px; height: 300px"></div>
+
     <div id="campgroundCarousel" class="carousel slide" data-ride="carousel">
       <div class="carousel-inner">
         <% campground.images.forEach((img, i ) => {%>
@@ -15,6 +15,7 @@
         </div>
         <% })%>
       </div>
+
       <% if (campground.images.length > 1) {%>
       <a
         class="carousel-control-prev"
@@ -78,6 +79,8 @@
     </div>
   </div>
   <div class="col-6">
+    <div id="map"></div>
+
     <% if( currentUser ) {%>
     <h2>Leave a Review</h2>
     <form
