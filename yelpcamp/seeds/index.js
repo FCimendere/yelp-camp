@@ -18,7 +18,7 @@ const sample =  array => array[Math.floor(Math.random() * array.length)];
 //create 50 random places name
 const seedDB = async () => {
     await Campground.deleteMany({});
-    for(let i = 0 ; i < 50 ; i++){
+    for(let i = 0 ; i < 200 ; i++){
         const random1000 = Math.floor(Math.random() * 1000);
         const price = Math.floor(Math.random() * 20) +10;
         const camp = new Campground({
@@ -29,7 +29,10 @@ const seedDB = async () => {
             price,
             geometry: { 
                 type: 'Point', 
-                coordinates: [ -75.97661, 36.849037 ] 
+                coordinates: [ 
+                    cities[random1000].longitude, 
+                    cities[random1000].latitude
+                ] 
                 },
             images: [
                 {
@@ -52,3 +55,4 @@ const seedDB = async () => {
 seedDB().then(() => {
     mongoose.connection.close();
 })
+
