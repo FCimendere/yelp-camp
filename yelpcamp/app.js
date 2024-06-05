@@ -23,6 +23,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const userRoutes = require('./routes/users');
 const campgroundRoutes = require('./routes/campgrounds');
 const reviewRoutes = require('./routes/reviews');
+const { prototype } = require('ejs-mate/lib/block');
 
 const username = process.env.USERNAME;
 const MongoDBStore = require("connect-mongo")(session);
@@ -176,7 +177,8 @@ app.use((err,req,res,next) => {
     res.status(statusCode).render('error', {err});
 })
 
+const port = process.env.PORT || 3000;
 //Server Listen
-app.listen(3000, () => {
-    console.log('Serving on port 3000')
+app.listen(port, () => {
+    console.log(`Serving on port ${port}`)
 })
