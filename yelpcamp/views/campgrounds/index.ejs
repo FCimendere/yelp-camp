@@ -11,11 +11,17 @@
   <div class="row">
     <div class="col-md-4">
       <%if(campground.images.length) {%>
-      <img class="img-fluid" alt="" src="<%=campground.images[0].url%>" />
+      <img
+        class="img-fluid"
+        alt=""
+        src="<%=campground.images[0].url%>"
+        crossorigin="anonymous"
+      />
       <% }else {%>
       <img
         class="img-fluid"
         alt=""
+        crossorigin="anonymous"
         src="https://res.cloudinary.com/douqbebwk/image/upload/v1600103881/YelpCamp/lz8jjv2gyynjil7lswf4.png"
       />
       <% } %>
@@ -45,4 +51,4 @@
   const mapToken = "<%-process.env.MAPBOX_TOKEN%>";
   const campgrounds = {features: <%-JSON.stringify(campgrounds)%>} ;
 </script>
-<script src="/javascripts/clusterMap.js"></script>
+<script src="/javascripts/clusterMap.js" crossorigin="anonymous"></script>

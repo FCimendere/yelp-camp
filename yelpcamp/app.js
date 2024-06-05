@@ -2,6 +2,7 @@ if(process.env.NODE_ENV !== 'production'){
     require('dotenv').config()
 }
 
+
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
@@ -15,6 +16,7 @@ const methodOverride = require('method-override');
 const passport = require('passport');
 // const LocalStrategy = require('passport-local');
 const User = require('./models/user');
+const helmet = require('helmet');
 
 const mongoSanitize = require('express-mongo-sanitize');
 
@@ -46,6 +48,11 @@ app.use(express.urlencoded({extended:true}));
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname,'public')));
 app.use(mongoSanitize());
+// Use Helmet for security protection!
+app.use(helmet(    
+    {contentSecurityPolicy: false,
+    xDownloadOptions: false,
+}));
 
 //session configuration
 const sessionConfig = {

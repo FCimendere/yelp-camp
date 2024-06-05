@@ -88,7 +88,12 @@
       <div class="mb-3">
         <% campground.images.forEach(function(img, i) { %>
 
-        <img src="<%=img.thumbnail %>" class="img-thumbnail" alt="" />
+        <img
+          crossorigin="anonymous"
+          src="<%=img.thumbnail %>"
+          class="img-thumbnail"
+          alt=""
+        />
         <div class="form-check-inline">
           <input
             type="checkbox"
