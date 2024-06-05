@@ -23,12 +23,14 @@ const mongoSanitize = require('express-mongo-sanitize');
 const userRoutes = require('./routes/users');
 const campgroundRoutes = require('./routes/campgrounds');
 const reviewRoutes = require('./routes/reviews');
+
 const username = process.env.USERNAME;
+const MongoDBStore = require("connect-mongo")(session);
 
-const mongoUrl = 'mongodb://127.0.0.1:27017/yelp-camp';
-
+const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/yelp-camp';
+// const dbUrl = 'mongodb://localhost:27017/yelp-camp';
 //MongoDB connection
-mongoose.connect(mongoUrl);
+mongoose.connect(dbUrl);
 
 //DB connection check
 const db =mongoose.connection;
@@ -51,6 +53,35 @@ app.use(express.static(path.join(__dirname,'public')));
 app.use(mongoSanitize({
     replaceWith: '_'
 }))
+
+const secret = process.env.SECRET || 'thisshouldbeabettersecret!';
+
+const store = new MongoDBStore({
+    url: dbUrl,
+    secret,
+    touchAfter: 24 * 60 * 60
+});
+
+store.on("error", function (e) {
+    console.log("SESSION STORE ERROR", e)
+})
+//session configuration
+const sessionConfig = {
+    store,
+    name: 'session',
+    secret,
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        httpOnly: true,
+        // secure: true,
+        expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+        maxAge: 1000 * 60 * 60 * 24 * 7
+    }
+}
+
+app.use(session(sessionConfig))
+app.use(flash());
 // Use Helmet for security protection!
 app.use(helmet());
 
@@ -98,22 +129,6 @@ app.use(
         },
     })
 );
-
-//session configuration
-const sessionConfig = {
-    name: 'session',
-    secret: 'SimpleSecretKey',
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-        httpOnly: true,
-        // secure: true,
-        expires: Date.now() + 1000*60*60*24*7,
-        maxAge: 1000*60*60*24*7
-    }
-}
-app.use(session(sessionConfig))
-app.use(flash());
 
 app.use(passport.initialize());
 app.use(passport.session());
