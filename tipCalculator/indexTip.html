@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      /* Add custom styles here */
+      .card {
+        max-width: 400px;
+        margin: 50px auto;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+    </style>
+    <title>Tip Calculator</title>
+  </head>
+  <body>
+    <div class="card">
+      <img src="./cafetip.jpg" class="card-img-top" alt="Card Image" />
+      <div class="card-body">
+        <form id="tipForm">
+          <div class="form-group">
+            <label for="textBill">Total Bill Amount:</label>
+            <input
+              type="number"
+              class="form-control"
+              id="textBill"
+              placeholder="Enter total bill amount"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="textTip">Tip Ratio:</label>
+            <select class="form-control" id="textTip">
+              <option value="10">10%</option>
+              <option value="12">12%</option>
+              <option value="15">15%</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="textPerson">Number of People:</label>
+            <input
+              type="number"
+              class="form-control"
+              id="textPerson"
+              placeholder="Enter number of people"
+              required
+            />
+          </div>
+          <button
+            type="button"
+            class="btn btn-primary"
+            onclick="calculateTip()"
+          >
+            Calculate Tip
+          </button>
+        </form>
+
+        <!-- Updated placement of the result -->
+        <p id="textTotal" class="mt-4"></p>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- External JavaScript file -->
+    <script src="./tipApp.js"></script>
+  </body>
+</html>

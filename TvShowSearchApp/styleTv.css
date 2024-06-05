@@ -1,0 +1,90 @@
+body{
+    background-color: #EAF4F4;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1{
+    text-align: center;
+    font-weight: 400;
+    text-transform: uppercase; 
+    color: #6B9080;
+}
+
+#searchForm{
+    display: grid;
+    grid-template-columns: auto;
+    width: 30%;
+    margin: 30px auto;
+}
+input, #searchButton {
+    margin: 10px 0;
+    border: solid 1px #6B9080;
+    background-color:  #F6FFF8;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.1rem;
+    border-radius: 10px;
+    padding: 10px 0;
+}
+
+#searchButton {
+    background-color: #F6FFF8;
+    text-transform: uppercase;
+    color:#6B9080;
+}
+
+input[placeholder]{
+    text-align: center;
+}
+.movielist {
+    display: grid;
+    width: 90%;
+    grid-template-columns: auto auto auto auto;
+    margin-left: auto;
+    margin-right: auto;
+    /* border: 1px solid red; */
+}
+
+.card{
+    display: inline-grid;
+    justify-content: space-around;
+    background-color: #CCE3DE;
+    /* border: 1px solid black; */
+    border-radius: 20px;
+    margin: 10px;
+    padding: 10px;
+}
+
+.col {
+    display: inline-grid;
+    justify-content: space-between;
+}
+
+.card-title {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.2rem;
+    color: #6B9080;
+}
+
+.imageShow{
+    display: block;
+    width: 300px;
+    border-radius: 20px 20px;
+    margin-top: 10px;
+}
+
+.card-link{
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    color: #6B9080;
+}
+
+.card-link:hover{
+   font-weight: 700;
+   text-decoration:underline;
+   transition: ease-in-out;
+}
+
