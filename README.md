@@ -11,8 +11,10 @@
 <li><strong>Comment System:</strong> Users can leave unlimited comments on each campground page.</li>
 <li><strong>Review System:</strong>Each user can leave one review per campground, with ratings between 1 and 5 stars.</li>
 <li><strong>Map Integration:</strong>
+  <ul>
 <li>Cluster maps embedded on the main campground listing page using MapBox API.</li>
 <li>Pinned maps embedded on detailed campground pages using MapBox API.</li>
+  </ul>
 </li>
 <li><strong>Image Management:</strong> Cloudinary is used for end-to-end image and video management.</li>
 <li><strong>Deployment:</strong> The app is deployed to Render, with the database hosted on MongoDB Atlas.</li>
