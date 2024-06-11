@@ -1,5 +1,5 @@
 <h1>YelpCamp Full-stack Web Project</h1>
-<a href="https://yelpcamp-wpw1.onrender.com">YelpCamp</a>
+👉 Check out for Live Website: <a href="https://yelpcamp-wpw1.onrender.com">YelpCamp</a>
 
 <h2>Project Summary</h2>
 <p>YelpCamp is a review website for campsites, allowing users to create, review, and interact with campgrounds. Key features include user authentication, an admin role, MapBox API integration, and full CRUD capabilities for campgrounds, comments, and reviews. This project is part of Colt Steele's Web Development Bootcamp course on Udemy.</p>
@@ -8,16 +8,15 @@
 <ul>
 <li><strong>Account Creation:</strong> Users can sign up and log in. Admin role is included.</li>
 <li><strong>Campground Management:</strong> Users can create, edit, update, and delete campgrounds they have uploaded, complete with photos.</li>
-<li><strong>Comment System:</strong> Users can leave unlimited comments on each campground page.</li>
-<li><strong>Review System:</strong>Each user can leave one review per campground, with ratings between 1 and 5 stars.</li>
+<li><strong>Review System:</strong> Users can leave reviews per campground, with ratings between 1 and 5 stars.</li>
 <li><strong>Map Integration:</strong>
   <ul>
 <li>Cluster maps embedded on the main campground listing page using MapBox API.</li>
 <li>Pinned maps embedded on detailed campground pages using MapBox API.</li>
   </ul>
 </li>
-<li><strong>Image Management:</strong> Cloudinary is used for end-to-end image and video management.</li>
-<li><strong>Deployment:</strong> The app is deployed to Render, with the database hosted on MongoDB Atlas.</li>
+<li><strong>Image Management:</strong> Cloudinary is used for image hosting.</li>
+<li><strong>Deployment:</strong> The app is deployed to <a href="https://render.com/">Render</a>, with the database hosted on <a href="https://www.mongodb.com/products/platform/atlas-database"> MongoDB Atlas</a>.</li>
 </ul>
 
 <h2>Look at Project</h2>
