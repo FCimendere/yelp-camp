@@ -9,7 +9,11 @@ body {
 }
 
 .cover-container {
-    max-width: 60vw;
+    max-width: 95vw;
+}
+
+.nav-masthead {
+    font-size: 1rem;
 }
 
 .nav-link {
