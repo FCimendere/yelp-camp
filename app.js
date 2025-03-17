@@ -151,30 +151,30 @@ app.use((req, res, next) => {
 });
 
 // This function will read a file and return its contents as a string
-// const readFileSync = (filePath) => {
-//   try {
-//     return fs.readFileSync(filePath, "utf8");
-//   } catch (err) {
-//     console.error(`Error reading file ${filePath}:`, err);
-//     return `<!-- Error reading ${filePath}: ${err.message} -->`;
-//   }
-// };
+const readFileSync = (filePath) => {
+  try {
+    return fs.readFileSync(filePath, "utf8");
+  } catch (err) {
+    console.error(`Error reading file ${filePath}:`, err);
+    return `<!-- Error reading ${filePath}: ${err.message} -->`;
+  }
+};
 
-// // Add these locals to make them available in your templates
-// app.use((req, res, next) => {
-//   // Only in Vercel environment, provide the inline partials
-//   if (process.env.VERCEL) {
-//     const navbarPath = path.join(__dirname, "views", "partials", "navbar.ejs");
-//     const flashPath = path.join(__dirname, "views", "partials", "flash.ejs");
-//     const footerPath = path.join(__dirname, "views", "partials", "footer.ejs");
+// Add these locals to make them available in your templates
+app.use((req, res, next) => {
+  // Only in Vercel environment, provide the inline partials
+  if (process.env.VERCEL) {
+    const navbarPath = path.join(__dirname, "views", "partials", "navbar.ejs");
+    const flashPath = path.join(__dirname, "views", "partials", "flash.ejs");
+    const footerPath = path.join(__dirname, "views", "partials", "footer.ejs");
 
-//     res.locals.inlineNavbar = readFileSync(navbarPath);
-//     res.locals.inlineFlash = readFileSync(flashPath);
-//     res.locals.inlineFooter = readFileSync(footerPath);
-//   }
+    res.locals.inlineNavbar = readFileSync(navbarPath);
+    res.locals.inlineFlash = readFileSync(flashPath);
+    res.locals.inlineFooter = readFileSync(footerPath);
+  }
 
-//   next();
-// });
+  next();
+});
 
 app.get("/fakeUser", async (req, res) => {
   const user = new User({ email: "test1@gmail.com", username: "test1" });
