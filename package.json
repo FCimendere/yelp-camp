@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "start": "node app"
   },
   "keywords": [],
-  "author": "",
+  "author": "Fulya Cimendere",
   "license": "ISC",
   "dependencies": {
     "@mapbox/mapbox-sdk": "^0.16.0",
