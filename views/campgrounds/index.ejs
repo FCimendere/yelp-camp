@@ -48,7 +48,21 @@
   </li> -->
 <% } %>
 <script>
-  const mapToken = "<%-process.env.MAPBOX_TOKEN%>";
-  const campgrounds = { features: "<%-JSON.stringify(campgrounds)%>" };
+  const mapToken = "<%- process.env.MAPBOX_TOKEN %>";
+</script>
+<script>
+  const campgrounds = <%- JSON.stringify({
+    type: "FeatureCollection",
+    features: campgrounds.map(cg => ({
+      type: "Feature",
+      geometry: cg.geometry,
+      properties: {
+        id: cg._id,
+        title: cg.title,
+        location: cg.location,
+        popUpMarkup: `<strong><a href="/campgrounds/${cg._id}">${cg.title}</a></strong><p>${cg.location}</p>`
+      }
+    }))
+  }) %>;
 </script>
 <script src="/javascripts/clusterMap.js" crossorigin="anonymous"></script>
